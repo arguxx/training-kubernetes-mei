@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: test-html
+    labels:
+        app: nginx
+        env: development
+        tier: frontend
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: nginx
+            env: development
+            tier: frontend
+    template:
+        metadata:
+            labels:
+                app: nginx
+                env: development
+                tier: frontend
+        spec:
+            containers:
+                - name: nginx
+                  image: rgx69/nginx-1:v3
+                  ports:
+                      - containerPort: 80
+            imagePullSecrets:
+                - name: regcred
